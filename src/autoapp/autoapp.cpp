@@ -99,7 +99,7 @@ int main(int argc, char* argv[])
     connectDialog.setWindowFlags(Qt::WindowStaysOnTopHint);
 
     QObject::connect(&mainWindow, &autoapp::ui::MainWindow::exit, []() { std::exit(0); });
-    QObject::connect(&mainWindow, &autoapp::ui::MainWindow::openSettings, &settingsWindow, &autoapp::ui::SettingsWindow::showFullScreen);
+    QObject::connect(&mainWindow, &autoapp::ui::MainWindow::openSettings, &settingsWindow, &autoapp::ui::SettingsWindow::showNormal);
     QObject::connect(&mainWindow, &autoapp::ui::MainWindow::openConnectDialog, &connectDialog, &autoapp::ui::ConnectDialog::exec);
 
     qApplication.setOverrideCursor(Qt::BlankCursor);
@@ -108,7 +108,7 @@ int main(int argc, char* argv[])
         qApplication.setOverrideCursor(cursor);
     });
 
-    mainWindow.showFullScreen();
+    mainWindow.showNormal();
 
     aasdk::usb::USBWrapper usbWrapper(usbContext);
     aasdk::usb::AccessoryModeQueryFactory queryFactory(usbWrapper, ioService);
